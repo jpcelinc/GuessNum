@@ -34,17 +34,22 @@ public class Main {
                 }
             }
             //       }
+            String startstr = "-" ;
             System.out.println("Start again ?");
-            mystart = scan.next();
+            while (!checkInput(startstr))
+            {
+                System.out.println("Input doesn't match Y or N. Try again.");
+                startstr = scan.next().toUpperCase();
+            }
+            mystart = startstr;
         } while ( "Y".equals(mystart) );
 
+ //       for (GameResult r : results) {
+ //           System.out.println("Result: " + r.name + "; triesCount:" + r.triesCount + "; duration:" + r.duration/1000.0 ) ;
+//
+ //       }
         for (GameResult r : results) {
-            System.out.println("Result: " + r.name + "; triesCount:" + r.triesCount + "; duration:" + r.duration/1000.0 ) ;
-
-        }
-        for (GameResult r : results) {
-            System.out.printf("%s %d %.2f sec\n",
-                    r.name,r.triesCount,r.duration/1000.0) ;
+            r.displayResult();
 
         }
     }
@@ -67,5 +72,16 @@ public class Main {
             }
         }
     }
+    private static boolean checkInput(String input)
+    {
+        String[] inputOptions = {"Y", "N"};
+        for(String i : inputOptions)
+        {
+            if(input.equals(i))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
-
